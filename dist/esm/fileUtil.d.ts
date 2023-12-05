@@ -28,6 +28,6 @@ export declare class FileUtil {
      * Writes a string to a file.
      */
     static writeStringToFile(data: string, directory: Directory, path: string, createIfNotExists: boolean, callback: Callback<void>): Promise<void>;
-    static readFile(directory: Directory, path: string): Promise<string>;
+    static readFile(directory: Directory, path: string): Promise<string | Blob>;
     static readDataFile(path: string): Promise<string>;
 }

@@ -107,6 +107,7 @@ var capacitorPlugin = (function (exports, acquisitionSdk, filesystem, core, http
                 try {
                     const statResult = yield filesystem.Filesystem.stat({ directory, path });
                     // directory for Android, NSFileTypeDirectory for iOS
+                    // @ts-ignore
                     return statResult.type === "directory" || statResult.type === "NSFileTypeDirectory";
                 }
                 catch (error) {
@@ -122,6 +123,7 @@ var capacitorPlugin = (function (exports, acquisitionSdk, filesystem, core, http
                 try {
                     const statResult = yield filesystem.Filesystem.stat({ directory, path });
                     // file for Android, NSFileTypeRegular for iOS
+                    // @ts-ignore
                     return statResult.type === "file" || statResult.type === "NSFileTypeRegular";
                 }
                 catch (error) {
@@ -170,6 +172,7 @@ var capacitorPlugin = (function (exports, acquisitionSdk, filesystem, core, http
                     const { files } = yield filesystem.Filesystem.readdir(sourceDir);
                     for (let i = 0; i < files.length; i++) {
                         const file = files[i];
+                        // @ts-ignore
                         if (ignoreList.includes(file))
                             continue;
                         const sourcePath = sourceDir.path + "/" + file;
@@ -243,6 +246,7 @@ var capacitorPlugin = (function (exports, acquisitionSdk, filesystem, core, http
             });
         }
         static readDataFile(path) {
+            // @ts-ignore
             return FileUtil.readFile(filesystem.Directory.Data, path);
         }
     }
@@ -442,6 +446,11 @@ var capacitorPlugin = (function (exports, acquisitionSdk, filesystem, core, http
             else {
                 options.data = requestBody;
             }
+            if (!options.params) {
+                // https://capacitorjs.com/docs/updating/plugins/5-0#plugincallgetobject--plugincallgetarray
+                // otherwise NullPointerExceptoin
+                options.params = {};
+            }
             http.Http.request(options).then((nativeRes) => {
                 if (typeof nativeRes.data === "object")
                     nativeRes.data = JSON.stringify(nativeRes.data);
@@ -543,6 +552,7 @@ var capacitorPlugin = (function (exports, acquisitionSdk, filesystem, core, http
                         serverUrl,
                         ignoreAppVersion: false,
                         appVersion,
+                        // @ts-ignore
                         clientUniqueId: device$1.uuid
                     };
                     if (deploymentKey) {
@@ -735,6 +745,7 @@ var capacitorPlugin = (function (exports, acquisitionSdk, filesystem, core, http
                 }
                 try {
                     const signature = yield FileUtil.readFile(filesystem.Directory.Data, filePath);
+                    // @ts-ignore
                     callback(null, signature);
                 }
                 catch (error) {
@@ -913,6 +924,7 @@ var capacitorPlugin = (function (exports, acquisitionSdk, filesystem, core, http
                     yield LocalPackage.handleCleanDeployment(newPackageLocation);
                     /* delete files mentioned in the manifest */
                     const content = yield FileUtil.readFile(diffManifest.directory, diffManifest.path);
+                    // @ts-ignore
                     manifest = JSON.parse(content);
                     yield FileUtil.deleteEntriesFromDataDirectory(newPackageLocation, manifest.deletedFiles);
                 }

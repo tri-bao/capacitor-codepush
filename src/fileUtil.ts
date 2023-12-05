@@ -10,6 +10,7 @@ export class FileUtil {
         try {
             const statResult = await Filesystem.stat({directory, path});
             // directory for Android, NSFileTypeDirectory for iOS
+            // @ts-ignore
             return statResult.type === "directory" || statResult.type === "NSFileTypeDirectory";
         } catch (error) {
             return false;
@@ -24,6 +25,7 @@ export class FileUtil {
         try {
             const statResult = await Filesystem.stat({directory, path});
             // file for Android, NSFileTypeRegular for iOS
+            // @ts-ignore
             return statResult.type === "file" || statResult.type === "NSFileTypeRegular";
         } catch (error) {
             return false;
@@ -72,6 +74,7 @@ export class FileUtil {
             const { files } = await Filesystem.readdir(sourceDir);
             for (let i = 0; i < files.length; i++) {
                 const file = files[i];
+                // @ts-ignore
                 if (ignoreList.includes(file)) continue;
                 const sourcePath = sourceDir.path + "/" + file;
                 const destPath = destinationDir.path + "/" + file;
@@ -129,12 +132,13 @@ export class FileUtil {
         }
     }
 
-    public static async readFile(directory: Directory, path: string): Promise<string> {
+    public static async readFile(directory: Directory, path: string): Promise<string | Blob> {
         const result = await Filesystem.readFile({directory, path, encoding: Encoding.UTF8});
         return result.data;
     }
 
     public static readDataFile(path: string): Promise<string> {
+        // @ts-ignore
         return FileUtil.readFile(Directory.Data, path);
     }
 }

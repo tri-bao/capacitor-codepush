@@ -208,6 +208,7 @@ export class LocalPackage extends Package implements ILocalPackage {
 
         try {
             const signature = await FileUtil.readFile(Directory.Data, filePath);
+            // @ts-ignore
             callback(null, signature);
         } catch (error) {
             // error reading signature file from bundle
@@ -392,6 +393,7 @@ export class LocalPackage extends Package implements ILocalPackage {
 
             /* delete files mentioned in the manifest */
             const content = await FileUtil.readFile(diffManifest.directory, diffManifest.path);
+            // @ts-ignore
             manifest = JSON.parse(content);
             await FileUtil.deleteEntriesFromDataDirectory(newPackageLocation, manifest.deletedFiles);
         } catch (error) {

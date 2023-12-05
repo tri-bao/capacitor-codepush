@@ -48,6 +48,11 @@ export class HttpRequester {
         else {
             options.data = requestBody;
         }
+        if (!options.params) {
+            // https://capacitorjs.com/docs/updating/plugins/5-0#plugincallgetobject--plugincallgetarray
+            // otherwise NullPointerExceptoin
+            options.params = {};
+        }
         NativeHttp.request(options).then((nativeRes) => {
             if (typeof nativeRes.data === "object")
                 nativeRes.data = JSON.stringify(nativeRes.data);

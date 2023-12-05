@@ -64,6 +64,7 @@ export class Sdk {
                 serverUrl,
                 ignoreAppVersion: false,
                 appVersion,
+                // @ts-ignore
                 clientUniqueId: device.uuid
             };
 

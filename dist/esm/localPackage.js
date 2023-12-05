@@ -160,6 +160,7 @@ export class LocalPackage extends Package {
             }
             try {
                 const signature = yield FileUtil.readFile(Directory.Data, filePath);
+                // @ts-ignore
                 callback(null, signature);
             }
             catch (error) {
@@ -338,6 +339,7 @@ export class LocalPackage extends Package {
                 yield LocalPackage.handleCleanDeployment(newPackageLocation);
                 /* delete files mentioned in the manifest */
                 const content = yield FileUtil.readFile(diffManifest.directory, diffManifest.path);
+                // @ts-ignore
                 manifest = JSON.parse(content);
                 yield FileUtil.deleteEntriesFromDataDirectory(newPackageLocation, manifest.deletedFiles);
             }

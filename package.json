@@ -1,6 +1,6 @@
 {
   "name": "capacitor-codepush",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "CodePush Plugin for Capacitor",
   "module": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",

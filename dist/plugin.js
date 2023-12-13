@@ -1130,6 +1130,7 @@ var capacitorPlugin = (function (exports, acquisitionSdk, filesystem, core, http
                         filePath: file,
                         fileDirectory: filesystem.Directory.Data,
                         responseType: "blob",
+                        headers: {},
                         params: {}
                     });
                 }

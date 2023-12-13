@@ -58,6 +58,7 @@ export class RemotePackage extends Package implements IRemotePackage {
         filePath: file,
         fileDirectory: Directory.Data,
         responseType: "blob",
+        headers: {},
         params: {}
       });
     } catch (e) {

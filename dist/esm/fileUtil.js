@@ -83,16 +83,18 @@ export class FileUtil {
                 for (let i = 0; i < files.length; i++) {
                     const file = files[i];
                     // @ts-ignore
-                    if (ignoreList.includes(file))
+                    if (ignoreList.includes(file.name))
                         continue;
-                    const sourcePath = sourceDir.path + "/" + file;
-                    const destPath = destinationDir.path + "/" + file;
+                    const sourcePath = sourceDir.path + "/" + file.name;
+                    const destPath = destinationDir.path + "/" + file.name;
                     const source = Object.assign(Object.assign({}, sourceDir), { path: sourcePath });
                     const destination = Object.assign(Object.assign({}, destinationDir), { path: destPath });
                     if (yield FileUtil.directoryExists(source.directory, source.path)) { // is directory
+                        console.log(`copying dir ${sourcePath} to ${destPath}`);
                         yield FileUtil.copyDirectoryEntriesTo(source, destination);
                     }
                     else { // is file
+                        console.log(`copying file ${sourcePath} to ${destPath}`);
                         yield FileUtil.copy(source, destination);
                     }
                 }

@@ -1,5 +1,5 @@
-import { Directory, GetUriOptions, Filesystem, Encoding } from "@capacitor/filesystem";
-import { Callback } from "./callbackUtil";
+import {Directory, GetUriOptions, Filesystem, Encoding} from "@capacitor/filesystem";
+import {Callback} from "./callbackUtil";
 
 
 /**
@@ -75,14 +75,16 @@ export class FileUtil {
             for (let i = 0; i < files.length; i++) {
                 const file = files[i];
                 // @ts-ignore
-                if (ignoreList.includes(file)) continue;
-                const sourcePath = sourceDir.path + "/" + file;
-                const destPath = destinationDir.path + "/" + file;
+                if (ignoreList.includes(file.name)) continue;
+                const sourcePath = sourceDir.path + "/" + file.name;
+                const destPath = destinationDir.path + "/" + file.name;
                 const source = { ...sourceDir, path: sourcePath };
                 const destination = { ...destinationDir, path: destPath };
                 if (await FileUtil.directoryExists(source.directory, source.path)) { // is directory
+                    console.log(`copying dir ${sourcePath} to ${destPath}`);
                     await FileUtil.copyDirectoryEntriesTo(source, destination);
                 } else { // is file
+                    console.log(`copying file ${sourcePath} to ${destPath}`);
                     await FileUtil.copy(source, destination);
                 }
             }

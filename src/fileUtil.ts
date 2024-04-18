@@ -135,11 +135,19 @@ export class FileUtil {
     }
 
     public static async readFile(directory: Directory, path: string): Promise<string | Blob> {
+        const fileExists = await FileUtil.fileExists(Directory.Data, path);
+        if (!fileExists) {
+            throw new Error(`File ${path} does not exist in directory ${directory}`);
+        }
         const result = await Filesystem.readFile({directory, path, encoding: Encoding.UTF8});
         return result.data;
     }
 
-    public static readDataFile(path: string): Promise<string> {
+    public static async readDataFile(path: string): Promise<string> {
+        const fileExists = await FileUtil.fileExists(Directory.Data, path);
+        if (!fileExists) {
+            throw new Error(`File ${path} does not exist in directory ${Directory.Data}`);
+        }
         // @ts-ignore
         return FileUtil.readFile(Directory.Data, path);
     }

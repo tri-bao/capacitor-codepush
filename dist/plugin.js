@@ -243,13 +243,23 @@ var capacitorPlugin = (function (exports, acquisitionSdk, filesystem, core, http
         }
         static readFile(directory, path) {
             return __awaiter(this, void 0, void 0, function* () {
+                const fileExists = yield FileUtil.fileExists(filesystem.Directory.Data, path);
+                if (!fileExists) {
+                    throw new Error(`File ${path} does not exist in directory ${directory}`);
+                }
                 const result = yield filesystem.Filesystem.readFile({ directory, path, encoding: filesystem.Encoding.UTF8 });
                 return result.data;
             });
         }
         static readDataFile(path) {
-            // @ts-ignore
-            return FileUtil.readFile(filesystem.Directory.Data, path);
+            return __awaiter(this, void 0, void 0, function* () {
+                const fileExists = yield FileUtil.fileExists(filesystem.Directory.Data, path);
+                if (!fileExists) {
+                    throw new Error(`File ${path} does not exist in directory ${filesystem.Directory.Data}`);
+                }
+                // @ts-ignore
+                return FileUtil.readFile(filesystem.Directory.Data, path);
+            });
         }
     }
 

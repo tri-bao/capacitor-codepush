@@ -153,13 +153,23 @@ export class FileUtil {
     }
     static readFile(directory, path) {
         return __awaiter(this, void 0, void 0, function* () {
+            const fileExists = yield FileUtil.fileExists(Directory.Data, path);
+            if (!fileExists) {
+                throw new Error(`File ${path} does not exist in directory ${directory}`);
+            }
             const result = yield Filesystem.readFile({ directory, path, encoding: Encoding.UTF8 });
             return result.data;
         });
     }
     static readDataFile(path) {
-        // @ts-ignore
-        return FileUtil.readFile(Directory.Data, path);
+        return __awaiter(this, void 0, void 0, function* () {
+            const fileExists = yield FileUtil.fileExists(Directory.Data, path);
+            if (!fileExists) {
+                throw new Error(`File ${path} does not exist in directory ${Directory.Data}`);
+            }
+            // @ts-ignore
+            return FileUtil.readFile(Directory.Data, path);
+        });
     }
 }
 //# sourceMappingURL=fileUtil.js.map

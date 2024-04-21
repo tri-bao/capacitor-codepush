@@ -459,6 +459,7 @@ export class LocalPackage extends Package implements ILocalPackage {
         };
 
         try {
+            console.error("readDataFile " + LocalPackage.RootDir + "/" + packageFile);
             const content = await FileUtil.readDataFile(LocalPackage.RootDir + "/" + packageFile);
             const packageInfo: IPackageInfoMetadata = JSON.parse(content);
             LocalPackage.getLocalPackageFromMetadata(packageInfo).then(packageSuccess, packageError);

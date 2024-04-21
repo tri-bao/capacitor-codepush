@@ -1003,6 +1003,7 @@ var capacitorPlugin = (function (exports, acquisitionSdk, filesystem, core, http
                     packageError && packageError(new Error("Cannot read package information. " + CodePushUtil.getErrorMessage(e)));
                 };
                 try {
+                    console.error("readDataFile " + LocalPackage.RootDir + "/" + packageFile);
                     const content = yield FileUtil.readDataFile(LocalPackage.RootDir + "/" + packageFile);
                     const packageInfo = JSON.parse(content);
                     LocalPackage.getLocalPackageFromMetadata(packageInfo).then(packageSuccess, packageError);

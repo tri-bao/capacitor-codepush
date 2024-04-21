@@ -139,7 +139,6 @@ export class FileUtil {
         if (!fileExists) {
             throw new Error(`File ${path} does not exist in directory ${directory}`);
         }
-        console.log(`file ${path} exists in dir ${Directory.Data}`);
         const result = await Filesystem.readFile({directory, path, encoding: Encoding.UTF8});
         return result.data;
     }
@@ -149,8 +148,6 @@ export class FileUtil {
         if (!fileExists) {
             throw new Error(`File ${path} does not exist in directory ${Directory.Data}`);
         }
-        throw new Error(`file ${path} exists in dir ${Directory.Data}`);
-
         // @ts-ignore
         return FileUtil.readFile(Directory.Data, path);
     }

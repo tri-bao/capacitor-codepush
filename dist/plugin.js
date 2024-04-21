@@ -247,6 +247,7 @@ var capacitorPlugin = (function (exports, acquisitionSdk, filesystem, core, http
                 if (!fileExists) {
                     throw new Error(`File ${path} does not exist in directory ${directory}`);
                 }
+                console.log(`file ${path} exists in dir ${filesystem.Directory.Data}`);
                 const result = yield filesystem.Filesystem.readFile({ directory, path, encoding: filesystem.Encoding.UTF8 });
                 return result.data;
             });
@@ -257,6 +258,7 @@ var capacitorPlugin = (function (exports, acquisitionSdk, filesystem, core, http
                 if (!fileExists) {
                     throw new Error(`File ${path} does not exist in directory ${filesystem.Directory.Data}`);
                 }
+                console.log(`file ${path} exists in dir ${filesystem.Directory.Data}`);
                 // @ts-ignore
                 return FileUtil.readFile(filesystem.Directory.Data, path);
             });

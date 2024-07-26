@@ -1,6 +1,6 @@
 {
   "name": "capacitor-codepush",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "CodePush Plugin for Capacitor",
   "module": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
@@ -30,7 +30,7 @@
   "license": "MIT",
   "devDependencies": {
     "@capacitor-community/http": "^1.4.1",
-    "@capacitor/cli": "^6.1.1",
+    "@capacitor/cli": "^6.0.0",
     "@capacitor/device": "^6.0.0",
     "@capacitor/dialog": "^6.0.0",
     "@capacitor/filesystem": "^6.0.0",
@@ -70,7 +70,7 @@
   },
   "peerDependencies": {
     "@capacitor-community/http": "^1.4.1",
-    "@capacitor/core": "^6.1.1",
+    "@capacitor/core": "^6.0.0",
     "@capacitor/device": "^6.0.0",
     "@capacitor/dialog": "^6.0.0",
     "@capacitor/filesystem": "^6.0.0"
